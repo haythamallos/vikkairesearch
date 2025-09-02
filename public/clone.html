@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone - Vikk Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Vikk AI Assistant</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-menu">
+                    <button id="backToDashboardBtn" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Dashboard
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="clone-page-section">
+                <div class="clone-page-card">
+                    <h1>AI Assistant</h1>
+                    <p>Chat with our AI-powered virtual assistant powered by ElevenLabs Convai.</p>
+                    
+                    <!-- ElevenLabs Convai Widget -->
+                    <elevenlabs-convai agent-id="agent_2901k3m5thjpemzt3073cy0kg2hb"></elevenlabs-convai>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <script>
+        // Back to dashboard functionality
+        document.getElementById('backToDashboardBtn').addEventListener('click', () => {
+            window.location.href = '/dashboard';
+        });
+    </script>
+</body>
+</html>

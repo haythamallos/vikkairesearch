@@ -1,0 +1,12 @@
+# Azure App Service Startup Command
+# This file specifies how to start your Node.js application
+
+# Option 1: Direct node command (recommended)
+node server.js
+
+# Option 2: Using npm start
+# npm start
+
+# Option 3: Using package.json engines specification
+# The engines field in package.json will automatically use the correct Node.js version
+

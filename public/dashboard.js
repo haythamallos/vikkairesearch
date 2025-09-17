@@ -1,9 +1,7 @@
 // Dashboard functionality - only for authenticated users
-let currentUser = null;
-let authToken = null;
+// currentUser and authToken are now managed by shared-header.js
 
 // DOM elements
-const cloneLawyerBtn = document.getElementById('cloneLawyerBtn');
 
 // Load shared header
 document.addEventListener('DOMContentLoaded', async () => {
@@ -26,6 +24,16 @@ async function loadSharedHeader() {
         await new Promise(resolve => {
             script.onload = resolve;
         });
+        
+        // Setup event listeners immediately after header loads
+        if (window.setupEventListenersImmediately) {
+            window.setupEventListenersImmediately();
+        }
+        
+        // Update username display after header is loaded
+        if (window.updateUsernameDisplay) {
+            window.updateUsernameDisplay();
+        }
     } catch (error) {
         console.error('Error loading shared header:', error);
     }
@@ -42,11 +50,6 @@ function initializeDashboard() {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Clone Lawyer button functionality
-    cloneLawyerBtn.addEventListener('click', () => {
-        window.location.href = '/sample-lawyer-page';
-    });
-    
     // Code Clone button functionality
     const codeCloneBtn = document.getElementById('codeCloneBtn');
     if (codeCloneBtn) {
@@ -55,17 +58,47 @@ function setupEventListeners() {
         });
     }
     
-    // Knowledge Graph button functionality
+    // Vikk Intelligence button functionality
+    const vikkIntelligenceBtn = document.getElementById('vikkIntelligenceBtn');
+    console.log('Vikk Intelligence button found:', !!vikkIntelligenceBtn);
+    if (vikkIntelligenceBtn) {
+        vikkIntelligenceBtn.addEventListener('click', () => {
+            console.log('Vikk Intelligence button clicked, navigating to /vikk-intelligence');
+            window.location.href = '/vikk-intelligence';
+        });
+        console.log('Vikk Intelligence button event listener attached');
+    } else {
+        console.log('Vikk Intelligence button not found in DOM');
+    }
+    
+    // Knowledge Graph button functionality - Hidden for now
+    /*
     const knowledgeGraphBtn = document.getElementById('knowledgeGraphBtn');
     if (knowledgeGraphBtn) {
         knowledgeGraphBtn.addEventListener('click', () => {
             window.location.href = '/knowledge-graph';
         });
     }
+    */
 }
 
 // Load dashboard data
 async function loadDashboardData() {
+    // Get auth variables from shared-header.js
+    const authToken = window.authToken || localStorage.getItem('authToken');
+    const currentUser = window.currentUser || JSON.parse(localStorage.getItem('currentUser') || 'null');
+    
+    // Check if we have authentication
+    if (!authToken || !currentUser) {
+        console.log('No authentication found, redirecting to login');
+        if (window.redirectToLogin) {
+            window.redirectToLogin();
+        } else {
+            window.location.href = '/';
+        }
+        return;
+    }
+    
     try {
         const response = await fetch('/api/dashboard', {
             headers: {
@@ -79,7 +112,18 @@ async function loadDashboardData() {
         } else {
             if (response.status === 401 || response.status === 403) {
                 // Token expired or invalid
-                logout();
+                if (window.logout) {
+                    window.logout();
+                } else {
+                    // Fallback if shared header not loaded yet
+                    authToken = null;
+                    currentUser = null;
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('currentUser');
+                    window.location.href = '/';
+                }
+            } else {
+                showError('Failed to load dashboard data');
             }
         }
     } catch (error) {
@@ -93,6 +137,8 @@ function updateDashboard(data) {
     // Dashboard data processing can be added here
 }
 
+
+// Logout and redirect functions are now provided by shared-header.js
 
 // Show error message
 function showError(message) {
@@ -120,6 +166,8 @@ function showError(message) {
 
 // Auto-refresh dashboard data every 30 seconds
 setInterval(() => {
+    const authToken = window.authToken || localStorage.getItem('authToken');
+    const currentUser = window.currentUser || JSON.parse(localStorage.getItem('currentUser') || 'null');
     if (authToken && currentUser) {
         loadDashboardData();
     }

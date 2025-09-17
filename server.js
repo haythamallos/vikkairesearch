@@ -66,11 +66,6 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-app.get('/sample-lawyer-page', (req, res) => {
-  // Always serve sample page - let client-side handle authentication
-  res.sendFile(path.join(__dirname, 'public', 'sample-lawyer-page.html'));
-});
-
 app.get('/clone', (req, res) => {
   // Public clone page - no authentication required
   res.sendFile(path.join(__dirname, 'public', 'clone.html'));
@@ -79,6 +74,11 @@ app.get('/clone', (req, res) => {
 app.get('/knowledge-graph', (req, res) => {
   // Always serve knowledge graph page - let client-side handle authentication
   res.sendFile(path.join(__dirname, 'public', 'knowledge-graph.html'));
+});
+
+app.get('/vikk-intelligence', (req, res) => {
+  // Always serve vikk intelligence page - let client-side handle authentication
+  res.sendFile(path.join(__dirname, 'public', 'vikk-intelligence.html'));
 });
 
 // Serve shared header component

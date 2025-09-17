@@ -1,6 +1,5 @@
 // Login functionality only
-let currentUser = null;
-let authToken = null;
+// currentUser and authToken are now managed by shared-header.js
 
 // DOM elements
 const loginForm = document.getElementById('loginForm');

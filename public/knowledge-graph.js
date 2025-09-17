@@ -1,6 +1,5 @@
 // Knowledge Graph page functionality
-let currentUser = null;
-let authToken = null;
+// currentUser and authToken are now managed by shared-header.js
 
 // DOM elements
 const fileUploadArea = document.getElementById('fileUploadArea');
@@ -30,6 +29,16 @@ async function loadSharedHeader() {
         await new Promise(resolve => {
             script.onload = resolve;
         });
+        
+        // Setup event listeners immediately after header loads
+        if (window.setupEventListenersImmediately) {
+            window.setupEventListenersImmediately();
+        }
+        
+        // Update username display after header is loaded
+        if (window.updateUsernameDisplay) {
+            window.updateUsernameDisplay();
+        }
         
         // Configure header for knowledge graph page
         setHeaderTitle('Knowledge Graph', 'fas fa-project-diagram');

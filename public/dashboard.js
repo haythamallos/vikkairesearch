@@ -2,85 +2,37 @@
 let currentUser = null;
 let authToken = null;
 
-// Immediate authentication check (runs before DOM is ready)
-(function() {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-        // No token, redirect to login
-        window.location.href = '/';
-        return;
-    }
-})();
-
 // DOM elements
-const userDisplayName = document.getElementById('userDisplayName');
-const logoutBtn = document.getElementById('logoutBtn');
 const cloneLawyerBtn = document.getElementById('cloneLawyerBtn');
-const activityList = document.getElementById('activityList');
 
-// Check authentication on page load
-document.addEventListener('DOMContentLoaded', () => {
-    // First check if we have basic access to this page
-    checkPageAccess();
-    // Then verify the token is valid
-    checkAuthentication();
+// Load shared header
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadSharedHeader();
+    initializeDashboard();
 });
 
-// Check if user is authenticated
-function checkAuthentication() {
-    const savedToken = localStorage.getItem('authToken');
-    const savedUser = localStorage.getItem('currentUser');
-    
-    if (!savedToken || !savedUser) {
-        // No authentication, redirect to login
-        redirectToLogin();
-        return;
-    }
-    
-    // Verify token is still valid
-    verifyToken(savedToken, savedUser);
-}
-
-// Check if we're on a protected page without proper authentication
-function checkPageAccess() {
-    // If we're on a protected page but don't have auth, redirect immediately
-    if (!localStorage.getItem('authToken')) {
-        redirectToLogin();
-        return;
-    }
-}
-
-// Verify JWT token
-async function verifyToken(token, userData) {
+async function loadSharedHeader() {
     try {
-        const response = await fetch('/api/profile', {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
+        const response = await fetch('/components/header.html');
+        const headerHtml = await response.text();
+        document.getElementById('header-container').innerHTML = headerHtml;
         
-        if (response.ok) {
-            // Token is valid, set user data
-            authToken = token;
-            currentUser = JSON.parse(userData);
-            initializeDashboard();
-        } else {
-            // Token is invalid, redirect to login
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('currentUser');
-            redirectToLogin();
-        }
+        // Load shared header JavaScript
+        const script = document.createElement('script');
+        script.src = '/js/shared-header.js';
+        document.head.appendChild(script);
+        
+        // Wait for shared header to initialize
+        await new Promise(resolve => {
+            script.onload = resolve;
+        });
     } catch (error) {
-        console.error('Error verifying token:', error);
-        redirectToLogin();
+        console.error('Error loading shared header:', error);
     }
 }
 
 // Initialize dashboard for authenticated user
 function initializeDashboard() {
-    // Set user display name
-    userDisplayName.textContent = currentUser.username;
-    
     // Setup event listeners
     setupEventListeners();
     
@@ -90,9 +42,6 @@ function initializeDashboard() {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Logout functionality
-    logoutBtn.addEventListener('click', logout);
-    
     // Clone Lawyer button functionality
     cloneLawyerBtn.addEventListener('click', () => {
         window.location.href = '/sample-lawyer-page';
@@ -105,20 +54,14 @@ function setupEventListeners() {
             window.location.href = '/clone';
         });
     }
-}
-
-// Logout functionality
-function logout() {
-    authToken = null;
-    currentUser = null;
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('currentUser');
-    redirectToLogin();
-}
-
-// Redirect to login page
-function redirectToLogin() {
-    window.location.href = '/';
+    
+    // Knowledge Graph button functionality
+    const knowledgeGraphBtn = document.getElementById('knowledgeGraphBtn');
+    if (knowledgeGraphBtn) {
+        knowledgeGraphBtn.addEventListener('click', () => {
+            window.location.href = '/knowledge-graph';
+        });
+    }
 }
 
 // Load dashboard data
@@ -147,50 +90,9 @@ async function loadDashboardData() {
 
 // Update dashboard with data
 function updateDashboard(data) {
-    // Update activity list
-    updateActivityList(data.recentActivity);
+    // Dashboard data processing can be added here
 }
 
-// Update activity list
-function updateActivityList(activities) {
-    if (!activities || !Array.isArray(activities)) {
-        activityList.innerHTML = '<p class="no-activity">No recent activity</p>';
-        return;
-    }
-    
-    activityList.innerHTML = '';
-    
-    activities.forEach(activity => {
-        const activityItem = document.createElement('div');
-        activityItem.className = 'activity-item';
-        
-        const icon = getActivityIcon(activity.action);
-        
-        activityItem.innerHTML = `
-            <div class="activity-icon">
-                <i class="fas ${icon}"></i>
-            </div>
-            <div class="activity-content">
-                <div class="activity-action">${activity.action}</div>
-                <div class="activity-meta">
-                    <span>${activity.time}</span>
-                    <span>by ${activity.user}</span>
-                </div>
-            </div>
-        `;
-        
-        activityList.appendChild(activityItem);
-    });
-}
-
-// Get activity icon based on action
-function getActivityIcon(action) {
-    if (action.includes('user')) return 'fa-user';
-    if (action.includes('payment')) return 'fa-credit-card';
-    if (action.includes('ticket')) return 'fa-ticket-alt';
-    if (action.includes('backup')) return 'fa-database';
-    return 'fa-info-circle';
-}
 
 // Show error message
 function showError(message) {

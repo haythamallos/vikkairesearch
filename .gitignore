@@ -67,3 +67,6 @@ Thumbs.db
 # Azure deployment files
 .azure/
 .deployment
+
+# Data processing folder
+data/

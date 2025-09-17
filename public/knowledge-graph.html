@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph - Vikk Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div id="header-container"></div>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="kg-page-section">
+                <div class="kg-page-card">
+                    <h1>Vikk Knowledge Graph</h1>
+                    <p>Creating knowledge graph for Vikk AI.</p>
+                    
+                    <!-- Drag and Drop Area -->
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop JSON file here</p>
+                            <p class="upload-subtitle">or click to browse</p>
+                            <input type="file" id="fileInput" accept=".json" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <!-- File Processing Status -->
+                    <div class="file-status" id="fileStatus" style="display: none;">
+                        <div class="status-content">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span id="statusText">Processing file...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Content Area for Graph Visualization -->
+                    <div class="kg-page-card-content" id="graphContent">
+                        <!-- Graph visualization will go here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="knowledge-graph.js"></script>
+</body>
+</html>

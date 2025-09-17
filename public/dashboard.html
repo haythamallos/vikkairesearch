@@ -10,26 +10,13 @@
 <body>
     <div class="dashboard-container">
         <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-left">
-                <div class="logo">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Vikk Dashboard</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="user-menu">
-                    <span id="userDisplayName">User</span>
-                    <button id="logoutBtn" class="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </div>
-            </div>
-        </header>
+        <div id="header-container"></div>
 
         <!-- Main Content -->
         <main class="dashboard-main">
-                            <!-- Clone Lawyer Section -->
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <!-- Clone Lawyer Section -->
                 <div class="clone-lawyer-section">
                     <div class="clone-lawyer-card">
                         <h2>Clone Lawyer</h2>
@@ -53,12 +40,15 @@
                     </div>
                 </div>
 
-            <!-- Recent Activity -->
-            <div class="activity-section">
-                <div class="activity-card">
-                    <h3>Recent Activity</h3>
-                    <div id="activityList" class="activity-list">
-                        <!-- Activity items will be populated here -->
+                <!-- Knowledge Graph Section -->
+                <div class="clone-lawyer-section">
+                    <div class="clone-lawyer-card">
+                        <h2>Vikk Knowledge Graph</h2>
+                        <p>Build knowledge graph with advanced data processing capabilities for Vikk AI.</p>
+                        <button id="knowledgeGraphBtn" class="clone-lawyer-btn">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Knowledge Graph</span>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -76,6 +76,21 @@ app.get('/clone', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'clone.html'));
 });
 
+app.get('/knowledge-graph', (req, res) => {
+  // Always serve knowledge graph page - let client-side handle authentication
+  res.sendFile(path.join(__dirname, 'public', 'knowledge-graph.html'));
+});
+
+// Serve shared header component
+app.get('/components/header.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'components', 'header.html'));
+});
+
+// Serve shared JavaScript files
+app.get('/js/shared-header.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'js', 'shared-header.js'));
+});
+
 
 
 // Login endpoint

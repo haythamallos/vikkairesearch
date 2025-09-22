@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Auth - Vikk AI Legal Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Vikk AI Legal Intelligence</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <!-- Navigation for logged out users -->
+            <nav class="main-nav" id="mainNav">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/login" class="nav-link" id="loginLink">Login</a>
+            </nav>
+            
+            <!-- User menu for logged in users -->
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <span id="userDisplayName">User</span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Test Content -->
+    <main class="main-content">
+        <div class="welcome-section">
+            <h1>Authentication Test Page</h1>
+            <p>This page helps debug authentication issues.</p>
+            <div id="debugInfo" style="margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+                <h3>Debug Information:</h3>
+                <p>Token: <span id="tokenStatus">Checking...</span></p>
+                <p>User: <span id="userStatus">Checking...</span></p>
+                <p>User Menu Display: <span id="userMenuStatus">Checking...</span></p>
+                <p>Main Nav Display: <span id="mainNavStatus">Checking...</span></p>
+            </div>
+            <div style="margin-top: 20px;">
+                <button onclick="simulateLogin()" style="padding: 10px 20px; margin-right: 10px;">Simulate Login</button>
+                <button onclick="simulateLogout()" style="padding: 10px 20px; margin-right: 10px;">Simulate Logout</button>
+                <button onclick="refreshDebug()" style="padding: 10px 20px;">Refresh Debug Info</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/shared-header.js"></script>
+    <script>
+        function refreshDebug() {
+            const token = localStorage.getItem('authToken');
+            const user = localStorage.getItem('currentUser');
+            const userMenu = document.getElementById('userMenu');
+            const mainNav = document.getElementById('mainNav');
+            
+            document.getElementById('tokenStatus').textContent = token ? 'Present' : 'Not found';
+            document.getElementById('userStatus').textContent = user ? JSON.parse(user).username : 'Not found';
+            document.getElementById('userMenuStatus').textContent = userMenu ? userMenu.style.display : 'Not found';
+            document.getElementById('mainNavStatus').textContent = mainNav ? mainNav.style.display : 'Not found';
+        }
+        
+        function simulateLogin() {
+            localStorage.setItem('authToken', 'test-token-123');
+            localStorage.setItem('currentUser', JSON.stringify({username: 'testuser', role: 'user'}));
+            refreshDebug();
+            // Trigger the navigation update
+            checkPageAccess();
+        }
+        
+        function simulateLogout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('currentUser');
+            refreshDebug();
+            // Trigger the navigation update
+            checkPageAccess();
+        }
+        
+        // Initial debug info
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                refreshDebug();
+            }, 200);
+        });
+    </script>
+</body>
+</html>

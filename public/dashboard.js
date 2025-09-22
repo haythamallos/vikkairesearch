@@ -3,41 +3,10 @@
 
 // DOM elements
 
-// Load shared header
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadSharedHeader();
+// Initialize dashboard
+document.addEventListener('DOMContentLoaded', () => {
     initializeDashboard();
 });
-
-async function loadSharedHeader() {
-    try {
-        const response = await fetch('/components/header.html');
-        const headerHtml = await response.text();
-        document.getElementById('header-container').innerHTML = headerHtml;
-        
-        // Load shared header JavaScript
-        const script = document.createElement('script');
-        script.src = '/js/shared-header.js';
-        document.head.appendChild(script);
-        
-        // Wait for shared header to initialize
-        await new Promise(resolve => {
-            script.onload = resolve;
-        });
-        
-        // Setup event listeners immediately after header loads
-        if (window.setupEventListenersImmediately) {
-            window.setupEventListenersImmediately();
-        }
-        
-        // Update username display after header is loaded
-        if (window.updateUsernameDisplay) {
-            window.updateUsernameDisplay();
-        }
-    } catch (error) {
-        console.error('Error loading shared header:', error);
-    }
-}
 
 // Initialize dashboard for authenticated user
 function initializeDashboard() {

@@ -60,6 +60,19 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Login page
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/test-auth', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'test-auth.html'));
+});
+
+app.get('/aws-meta', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'aws-meta.html'));
+});
+
 // Protected route - requires authentication
 app.get('/dashboard', (req, res) => {
   // Always serve dashboard page - let client-side handle authentication
@@ -89,6 +102,10 @@ app.get('/components/header.html', (req, res) => {
 // Serve shared JavaScript files
 app.get('/js/shared-header.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'js', 'shared-header.js'));
+});
+
+app.get('/js/login.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'js', 'login.js'));
 });
 
 

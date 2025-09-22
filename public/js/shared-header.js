@@ -12,7 +12,7 @@ function checkAuthentication() {
     const savedUser = localStorage.getItem('currentUser');
     
     if (!savedToken || !savedUser) {
-        redirectToLogin();
+        // Don't redirect here - let checkPageAccess handle it
         return;
     }
     
@@ -20,10 +20,53 @@ function checkAuthentication() {
 }
 
 function checkPageAccess() {
-    if (!localStorage.getItem('authToken')) {
+    const currentPath = window.location.pathname;
+    const hasToken = localStorage.getItem('authToken');
+    
+    // For home page, don't redirect - just show appropriate navigation
+    if (currentPath === '/' || currentPath === '/index.html') {
+        if (hasToken) {
+            // User is logged in, show user menu
+            showUserMenu();
+        } else {
+            // User is not logged in, show main navigation
+            hideUserMenu();
+        }
+        return;
+    }
+    
+    // For login page, show appropriate navigation
+    if (currentPath === '/login') {
+        if (hasToken) {
+            // User is already logged in, redirect to dashboard
+            window.location.href = '/dashboard';
+        } else {
+            // User is not logged in, show main navigation
+            hideUserMenu();
+        }
+        return;
+    }
+    
+    // For aws-meta page, show appropriate navigation (public page)
+    if (currentPath === '/aws-meta') {
+        if (hasToken) {
+            // User is logged in, show user menu
+            showUserMenu();
+        } else {
+            // User is not logged in, show main navigation
+            hideUserMenu();
+        }
+        return;
+    }
+    
+    // For other pages, require authentication
+    if (!hasToken) {
         redirectToLogin();
         return;
     }
+    
+    // For protected pages, show user menu if logged in
+    showUserMenu();
 }
 
 async function verifyToken(token, userData) {
@@ -57,8 +100,11 @@ function initializeHeader() {
     // Set up event listeners first
     setupHeaderEventListeners();
     
-    // Then set the username
+    // Then set the username and show user menu
     updateUsernameDisplay();
+    
+    // Show user menu for authenticated users
+    showUserMenu();
 }
 
 function updateUsernameDisplay() {
@@ -75,6 +121,28 @@ function updateUsernameDisplay() {
     }
 }
 
+function showUserMenu() {
+    const userMenu = document.getElementById('userMenu');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (userMenu && mainNav) {
+        // Show user menu and hide main nav when logged in
+        userMenu.style.display = 'flex';
+        mainNav.style.display = 'none';
+    }
+}
+
+function hideUserMenu() {
+    const userMenu = document.getElementById('userMenu');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (userMenu && mainNav) {
+        // Hide user menu and show main nav when not logged in
+        userMenu.style.display = 'none';
+        mainNav.style.display = 'flex';
+    }
+}
+
 // Also setup event listeners immediately when DOM is ready
 function setupEventListenersImmediately() {
     // Use a small delay to ensure the header is loaded
@@ -87,36 +155,24 @@ function setupEventListenersImmediately() {
 window.setupEventListenersImmediately = setupEventListenersImmediately;
 window.updateUsernameDisplay = updateUsernameDisplay;
 
-// Alternative approach: Use event delegation for more reliable event handling
+// Use event delegation for reliable event handling
 function setupEventDelegation() {
     // Use event delegation on the document body to catch clicks on logout button
     document.addEventListener('click', function(e) {
         if (e.target && e.target.id === 'logoutBtn') {
-            console.log('Logout button clicked via event delegation');
             logout();
         }
     });
-    console.log('Event delegation setup for logout button');
 }
 
 // Setup event delegation immediately
 setupEventDelegation();
 
 function setupHeaderEventListeners() {
-    const logoutBtn = document.getElementById('logoutBtn');
-    console.log('Setting up header event listeners, logoutBtn found:', !!logoutBtn);
-    if (logoutBtn) {
-        // Remove any existing event listeners to avoid duplicates
-        logoutBtn.removeEventListener('click', logout);
-        logoutBtn.addEventListener('click', logout);
-        console.log('Logout button event listener attached');
-    } else {
-        console.log('Logout button not found in DOM');
-    }
+    // Event listeners are handled by delegation, no need for direct listeners
 }
 
 function logout() {
-    console.log('Logout function called');
     authToken = null;
     currentUser = null;
     // Update global references
@@ -124,15 +180,18 @@ function logout() {
     window.currentUser = null;
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
-    console.log('Cleared auth data, redirecting to login');
-    redirectToLogin();
+    
+    // Hide user menu and show main navigation
+    hideUserMenu();
+    
+    window.location.href = '/';
 }
 
 // Make logout function globally available
 window.logout = logout;
 
 function redirectToLogin() {
-    window.location.href = '/';
+    window.location.href = '/login';
 }
 
 // Make redirectToLogin function globally available
@@ -169,8 +228,17 @@ function addBackButton(backUrl = '/dashboard') {
 
 // Initialize header when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    checkPageAccess();
-    checkAuthentication();
+    // Use a small delay to ensure all elements are loaded
+    setTimeout(() => {
+        // Always call checkPageAccess first to set the correct navigation state
+        checkPageAccess();
+        
+        // Only check authentication for pages that require it
+        const currentPath = window.location.pathname;
+        if (currentPath !== '/' && currentPath !== '/index.html' && currentPath !== '/login' && currentPath !== '/aws-meta') {
+            checkAuthentication();
+        }
+    }, 100);
 });
 
 

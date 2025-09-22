@@ -3,53 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vikk Dashboard</title>
+    <title>Home - Vikk AI Legal Intelligence</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Login Section -->
-    <div id="loginSection" class="login-container">
-        <div class="login-card">
-            <div class="login-header">
-                <div class="logo">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Vikk AI Research</span>
-                </div>
-                <p>Sign in to your account</p>
+    <!-- Navigation Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Vikk AI Legal Intelligence</span>
             </div>
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="login-btn">
-                    <span>Sign In</span>
-                    <i class="fas fa-arrow-right"></i>
+        </div>
+        <div class="header-right">
+            <!-- Navigation for logged out users -->
+            <nav class="main-nav" id="mainNav">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/login" class="nav-link" id="loginLink">Login</a>
+            </nav>
+            
+            <!-- User menu for logged in users -->
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <span id="userDisplayName">User</span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
                 </button>
-            </form>
-            <!-- <div class="demo-credentials">
-                <p>Demo Credentials:</p>
-                <div class="credential-item">
-                    <span>admin / admin123</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- AWS-Meta Announcement Section -->
+        <div class="aws-meta-announcement">
+            <div class="announcement-container">
+                <div class="badge">
+                    <span class="dot"></span>
+                    Selected: AWS × Meta Partnership Program
                 </div>
-                <div class="credential-item">
-                    <span>user / user123</span>
+
+                <h1>Proud to Join the AWS × Meta Partnership Program</h1>
+                <p class="subtitle">Vikk AI is honored to be one of only 33 companies worldwide selected for this prestigious collaboration. Together, we're shaping the future of AI‑driven legal assistance.</p>
+
+                <div class="cta-buttons">
+                    <a class="btn btn-primary" href="/aws-meta">Learn More About Our Journey →</a>
+                    <a class="btn btn-secondary" href="https://markets.businessinsider.com/news/stocks/vikk-ai-selected-for-prestigious-aws-meta-llama-startup-program-1035171958" target="_blank" rel="noopener noreferrer">Press Release</a>
+                    <button class="btn btn-whitepaper" id="whitepaperBtn">Access Whitepaper</button>
                 </div>
-                <div class="credential-item">
-                    <span>demo / demo123</span>
+
+                <div class="partner-logos">
+                    <img src="https://dummyimage.com/120x28/ffffff/000000&text=Vikk+AI" alt="Vikk AI logo"/>
+                    <span class="separator">×</span>
+                    <img src="https://dummyimage.com/80x28/ffffff/000000&text=AWS" alt="AWS logo"/>
+                    <span class="separator">×</span>
+                    <img src="https://dummyimage.com/100x28/ffffff/000000&text=Meta" alt="Meta logo"/>
                 </div>
-            </div> -->
+
+                <p class="footnote">No jargon. Big impact. More updates coming soon.</p>
+            </div>
+            <div class="glow-effect"></div>
+        </div>
+    </main>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Access Whitepaper</h3>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Please enter the password to access the whitepaper:</p>
+                <input type="password" id="passwordInput" placeholder="Enter password" />
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="submitPassword" class="btn btn-primary">Submit</button>
+                <button id="cancelPassword" class="btn btn-secondary">Cancel</button>
+            </div>
         </div>
     </div>
 
-
-
-    <script src="script.js"></script>
+    <script src="js/shared-header.js"></script>
+    <script src="js/whitepaper.js"></script>
 </body>
 </html>

@@ -8,45 +8,17 @@ const fileStatus = document.getElementById('fileStatus');
 const statusText = document.getElementById('statusText');
 const graphContent = document.getElementById('graphContent');
 
-// Load shared header
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadSharedHeader();
+// Initialize page
+document.addEventListener('DOMContentLoaded', () => {
+    // Configure header for knowledge graph page
+    if (window.setHeaderTitle) {
+        setHeaderTitle('Knowledge Graph', 'fas fa-project-diagram');
+    }
+    if (window.addBackButton) {
+        addBackButton('/dashboard');
+    }
     initializePage();
 });
-
-async function loadSharedHeader() {
-    try {
-        const response = await fetch('/components/header.html');
-        const headerHtml = await response.text();
-        document.getElementById('header-container').innerHTML = headerHtml;
-        
-        // Load shared header JavaScript
-        const script = document.createElement('script');
-        script.src = '/js/shared-header.js';
-        document.head.appendChild(script);
-        
-        // Wait for shared header to initialize
-        await new Promise(resolve => {
-            script.onload = resolve;
-        });
-        
-        // Setup event listeners immediately after header loads
-        if (window.setupEventListenersImmediately) {
-            window.setupEventListenersImmediately();
-        }
-        
-        // Update username display after header is loaded
-        if (window.updateUsernameDisplay) {
-            window.updateUsernameDisplay();
-        }
-        
-        // Configure header for knowledge graph page
-        setHeaderTitle('Knowledge Graph', 'fas fa-project-diagram');
-        addBackButton('/dashboard');
-    } catch (error) {
-        console.error('Error loading shared header:', error);
-    }
-}
 
 // Initialize page for authenticated user
 function initializePage() {

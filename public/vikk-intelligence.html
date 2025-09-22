@@ -8,9 +8,32 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Vikk AI Legal Intelligence</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <!-- Navigation for logged out users -->
+            <nav class="main-nav" id="mainNav">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/login" class="nav-link" id="loginLink">Login</a>
+            </nav>
+            
+            <!-- User menu for logged in users -->
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <span id="userDisplayName">User</span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
     <div class="dashboard-container">
-        <!-- Header -->
-        <div id="header-container"></div>
 
         <!-- Main Content -->
         <main class="dashboard-main">
@@ -34,6 +57,7 @@
         </main>
     </div>
 
+    <script src="js/shared-header.js"></script>
     <script src="vikk-intelligence.js"></script>
 </body>
 </html>

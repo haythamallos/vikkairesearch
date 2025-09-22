@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Vikk AI Legal Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Vikk AI Legal Intelligence</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <!-- Navigation for logged out users -->
+            <nav class="main-nav" id="mainNav">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/login" class="nav-link active" id="loginLink">Login</a>
+            </nav>
+            
+            <!-- User menu for logged in users -->
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <span id="userDisplayName">User</span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <div id="loginSection" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Vikk AI Legal Intelligence</span>
+                </div>
+                <p>Sign in to your account</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <span>Sign In</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <!-- <div class="demo-credentials">
+                <p>Demo Credentials:</p>
+                <div class="credential-item">
+                    <span>admin / admin123</span>
+                </div>
+                <div class="credential-item">
+                    <span>user / user123</span>
+                </div>
+                <div class="credential-item">
+                    <span>demo / demo123</span>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="js/shared-header.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

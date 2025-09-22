@@ -3,11 +3,18 @@
     <div class="header-left">
         <div class="logo">
             <i class="fas fa-chart-line"></i>
-            <span id="headerTitle">Vikk Dashboard</span>
+            <span id="headerTitle">Vikk AI Legal Intelligence</span>
         </div>
     </div>
     <div class="header-right">
-        <div class="user-menu">
+        <!-- Navigation for logged out users -->
+        <nav class="main-nav" id="mainNav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/login" class="nav-link" id="loginLink">Login</a>
+        </nav>
+        
+        <!-- User menu for logged in users -->
+        <div class="user-menu" id="userMenu" style="display: none;">
             <span id="userDisplayName">User</span>
             <button id="logoutBtn" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>

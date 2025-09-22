@@ -157,6 +157,36 @@ body {
     font-size: 20px;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #f8f9fa;
+    color: #667eea;
+}
+
+.nav-link.active {
+    background: #667eea;
+    color: white;
+}
+
 .header-right .user-menu {
     display: flex;
     align-items: center;
@@ -181,6 +211,578 @@ body {
 .logout-btn:hover {
     background: #ff3742;
     transform: translateY(-1px);
+}
+
+/* Main Content */
+.main-content {
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.welcome-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+}
+
+.welcome-section h1 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.welcome-section p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* AWS-Meta Announcement Styles */
+.aws-meta-announcement {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(1200px 800px at 10% 10%, rgba(124, 58, 237, 0.18), transparent 60%),
+                radial-gradient(1200px 800px at 90% 30%, rgba(34, 211, 238, 0.12), transparent 60%),
+                linear-gradient(180deg, #0f172a, #1e293b);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.announcement-container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 40px 20px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    font-size: 0.9rem;
+    color: #22d3ee;
+    margin-bottom: 1.5rem;
+}
+
+.badge .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: #22d3ee;
+    box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15);
+    animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+}
+
+.aws-meta-announcement h1 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 4vw + 0.8rem, 3.5rem);
+    margin: 0.9rem 0 0.3rem;
+    color: #e5e7eb;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 1.2vw + 0.7rem, 1.25rem);
+    color: #94a3b8;
+    max-width: 58ch;
+    margin: 0 auto 1.25rem;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 1.25rem 0;
+}
+
+.btn {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:focus {
+    outline: 2px solid rgba(124, 58, 237, 0.45);
+    outline-offset: 3px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #22d3ee, #60a5fa, #7c3aed);
+    padding: 0.95rem 1.15rem;
+    color: #0b1020;
+    box-shadow: 0 10px 22px rgba(124, 58, 237, 0.25), 0 4px 12px rgba(34, 211, 238, 0.18);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #e5e7eb;
+    padding: 0.9rem 1.05rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-whitepaper {
+    background: linear-gradient(90deg, #f59e0b, #f97316, #ea580c);
+    color: white;
+    padding: 0.95rem 1.15rem;
+    box-shadow: 0 10px 22px rgba(245, 158, 11, 0.25), 0 4px 12px rgba(249, 115, 22, 0.18);
+}
+
+.btn-whitepaper:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(245, 158, 11, 0.3), 0 6px 14px rgba(249, 115, 22, 0.2);
+}
+
+.partner-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.9;
+    margin: 1.35rem 0;
+}
+
+.partner-logos img {
+    height: 28px;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+
+.separator {
+    opacity: 0.5;
+    font-size: 1.2rem;
+    color: #94a3b8;
+}
+
+.footnote {
+    margin-top: 1rem;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.glow-effect {
+    position: absolute;
+    inset: auto -15% -20% -15%;
+    height: 300px;
+    background: radial-gradient(55% 60% at 50% 50%, rgba(124, 58, 237, 0.25), transparent 60%);
+    filter: blur(42px);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .aws-meta-announcement {
+        min-height: 70vh;
+        margin: 10px 0;
+    }
+    
+    .announcement-container {
+        padding: 30px 15px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Journey Page Styles */
+.journey-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+.journey-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.journey-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.journey-header h1 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.journey-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 50px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.journey-intro {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.journey-story {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.journey-belief {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 40px 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.journey-belief p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    font-style: italic;
+}
+
+.journey-milestone {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    border-left: 5px solid #667eea;
+}
+
+.journey-milestone p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+    margin: 0;
+}
+
+.journey-vision {
+    background: linear-gradient(135deg, #22d3ee, #60a5fa);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+}
+
+.journey-vision p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.journey-cta {
+    text-align: center;
+    margin: 40px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+}
+
+.journey-cta p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.journey-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.journey-actions {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.journey-actions .btn {
+    margin: 0 10px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments for journey page */
+@media (max-width: 768px) {
+    .journey-container {
+        padding: 0 15px;
+    }
+    
+    .journey-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .journey-content {
+        padding: 30px 20px;
+    }
+    
+    .journey-intro {
+        font-size: 1.1rem;
+    }
+    
+    .journey-story {
+        font-size: 1rem;
+    }
+    
+    .journey-belief p,
+    .journey-vision p {
+        font-size: 1.1rem;
+    }
+    
+    .journey-cta p {
+        font-size: 1.1rem;
+    }
+    
+    .journey-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .journey-actions .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 15% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #ff6b6b;
+}
+
+.modal-body {
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.modal-body p {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#passwordInput {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+#passwordInput:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 20px;
+}
+
+.modal-footer {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-footer .btn {
+    flex: 1;
+    max-width: 120px;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 20% auto;
+        width: 95%;
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-body {
+        padding: 20px 15px;
+    }
+    
+    .modal-footer {
+        padding: 15px;
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+        max-width: none;
+        width: 100%;
+    }
 }
 
 .back-btn {

@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const WHITEPAPER_PASSWORD = 'vikk2025';
     
     // Whitepaper URL
-    const WHITEPAPER_URL = 'https://1drv.ms/b/c/db12b5aa8dc6c21a/EQ2U8VeijtZDt-H_HliEyPwBEpys0ZcfI2g3NwAvHvd8Qw?e=bBkgsQ';
-    
+    const WHITEPAPER_URL = 'https://1drv.ms/b/c/db12b5aa8dc6c21a/EVRiyxhUVytCiRjqDuHaNikB-2-L09aWaMMy6GiZq0K5xg?e=haMqEL'
     // Open modal when whitepaper button is clicked
     whitepaperBtn.addEventListener('click', () => {
         passwordModal.style.display = 'block';
